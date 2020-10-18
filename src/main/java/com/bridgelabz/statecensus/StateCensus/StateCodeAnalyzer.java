@@ -38,6 +38,12 @@ public class StateCodeAnalyzer {
        while(stateIterator.hasNext()) {
     	   count++;
 			CSVStateCode state = stateIterator.next();
+			System.out.println();
+			if (CSVStateCode.getStateCode() == null || CSVStateCode.getTinNumber() == null || CSVStateCode.getStateCode() == null || CSVStateCode.getSerialNO() == null)
+			{
+				throw new ExceptionStateCensus(CensusExceptionType.INCORRECT_DATA_IN_FILE_OR_INCORRECT_HEADER, "Incorrect data or dellimeter issue in csv file");
+
+			}
 			logger.info("state  information : "+state.toString());
 		}
        return count ;
