@@ -16,7 +16,7 @@ public class StateCensusAnalyzer {
 
 	public static int readingStateCensusFromCSV(String filePath) throws ExceptionStateCensus
 	{
-		int count =0;
+		int count =0 ;
 		Logger logger = Logger.getLogger(StateCensusAnalyzer.class.getName());
 		Reader reader = null;
 		try {
@@ -39,15 +39,16 @@ public class StateCensusAnalyzer {
        Iterator<CSVStateCensus> stateIterator = csvToBean.iterator();
 
        while(stateIterator.hasNext()) {
-    	   count++;
 						CSVStateCensus state = stateIterator.next();
 						if (CSVStateCensus.getStateName() == null || Integer.parseInt(CSVStateCensus.getPopulation()) == 0 || Integer.parseInt(CSVStateCensus.getDensityPerSqKm()) == 0
 					|| Integer.parseInt(CSVStateCensus.getAreaInSqKm()) == 0)
 			{
-				throw new ExceptionStateCensus(CensusExceptionType.INCORRECT_DATA_IN_FILE, "Incorrect data or dellimeter issue in csv file");
-
+				throw new ExceptionStateCensus(CensusExceptionType.INCORRECT_DATA_IN_FILE_OR_INCORRECT_HEADER, "Incorrect data or header issue in csv file");
 			}
+						
 				logger.info("state  information : "+state.toString());
+				 count++;
+
 						}
 
 		       return count-1 ;
