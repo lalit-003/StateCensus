@@ -52,7 +52,7 @@ public class StateCensusAnalyzer {
 
 						}
 
-		       return count-1 ;
+		       return count ;
 	}
 	       
 }
