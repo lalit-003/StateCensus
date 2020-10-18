@@ -19,7 +19,7 @@ public class TestingStateCensus {
 		{
 			int count =  StateCensusAnalyzer.readingStateCensusFromCSV(StateCensus_FilePath);
 			logger.info("Count is : "+ count);
-			Assert.assertEquals(28, count);
+			Assert.assertEquals(29, count);
 		}
 		// Test to check number of entries in csv file using iterator
 		  //Sad Test Case
@@ -39,7 +39,7 @@ public class TestingStateCensus {
 			{
 				int count =  StateCensusAnalyzer.readingStateCensusFromCSV(Wrong_StateCensus_FilePath);
 				logger.info("Count is : "+ count);
-				Assert.assertEquals(28, count);
+				Assert.assertEquals(29, count);
 						}
 			
 			public static String Wrong_StateCensus_FileType = "D:\\FileIO\\demo\\StateCensus.txt";
@@ -49,7 +49,7 @@ public class TestingStateCensus {
 			{
 				int count =  StateCensusAnalyzer.readingStateCensusFromCSV(Wrong_StateCensus_FileType);
 				logger.info("Count is : "+ count);
-				Assert.assertEquals(28, count);
+				Assert.assertEquals(29, count);
 						}
 			
 			public static String StateCensus_Delimeter = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\StateCensusDeli.csv";
@@ -60,7 +60,7 @@ public class TestingStateCensus {
 				{
 					int count =  StateCensusAnalyzer.readingStateCensusFromCSV(StateCensus_Delimeter);
 					logger.info("Count is : "+ count);
-					Assert.assertEquals(28, count);
+					Assert.assertEquals(29, count);
 							}
 			
 				public static String StateCensus_Header = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\StateCensusHeader.csv";
@@ -70,7 +70,7 @@ public class TestingStateCensus {
 				{
 					int count =  StateCensusAnalyzer.readingStateCensusFromCSV(StateCensus_Header);
 					logger.info("Count is : "+ count);
-					Assert.assertEquals(28, count);
+					Assert.assertEquals(29, count);
 							}
 
 
