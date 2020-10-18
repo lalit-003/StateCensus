@@ -41,4 +41,15 @@ public class TestingStateCensus {
 				logger.info("Count is : "+ count);
 				Assert.assertEquals(28, count);
 						}
+			
+			public static String Wrong_StateCensus_FileType = "D:\\FileIO\\demo\\StateCensus.txt";
+			 // test to show that program throws exception when given wrong file type
+			@Test
+			public void givenWrongFileTypeShouldReturnException() throws ExceptionStateCensus
+			{
+				int count =  StateCensusAnalyzer.readingStateCensusFromCSV(Wrong_StateCensus_FileType);
+				logger.info("Count is : "+ count);
+				Assert.assertEquals(28, count);
+						}
+
 }
