@@ -20,4 +20,16 @@ public class TestingStateCode {
 			logger.info("Count is : "+ count);
 			Assert.assertEquals(37, count);
 		}
+		
+		public static String Wrong_StateCensus_FilePath = "C:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCode.csv";
+
+		 // test to show that program throws exception when given wrong file path 
+		@Test
+		public void givenWrongFilePathShouldReturnException() throws ExceptionStateCensus
+		{
+			int count =  StateCensusAnalyzer.readingStateCensusFromCSV(Wrong_StateCensus_FilePath);
+			logger.info("Count is : "+ count);
+			Assert.assertEquals(28, count);
+					}
+
 }
