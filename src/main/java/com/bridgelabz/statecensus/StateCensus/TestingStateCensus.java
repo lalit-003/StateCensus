@@ -51,5 +51,16 @@ public class TestingStateCensus {
 				logger.info("Count is : "+ count);
 				Assert.assertEquals(28, count);
 						}
+			
+			public static String StateCensus_Delimeter = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\StateCensusDeli.csv";
+
+			 // test to show that program throws exception when given wrong file type
+				@Test
+				public void givenWrongDelimeterInFile_ReturnCustomException() throws ExceptionStateCensus
+				{
+					int count =  StateCensusAnalyzer.readingStateCensusFromCSV(StateCensus_Delimeter);
+					logger.info("Count is : "+ count);
+					Assert.assertEquals(28, count);
+							}
 
 }
