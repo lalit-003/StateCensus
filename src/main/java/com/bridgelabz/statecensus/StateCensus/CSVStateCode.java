@@ -5,33 +5,33 @@ package com.bridgelabz.statecensus.StateCensus;
 
 	public class CSVStateCode {
 		@CsvBindByName(column="SrNO", required = true)
-		private String serialNo;
+		private static String serialNo;
 		@CsvBindByName(column="State Name", required = true)
-		private String stateName;
+		private static String stateName;
 		@CsvBindByName(column="TIN", required = true)
-		private String tinNumber;
+		private static String tinNumber;
 		@CsvBindByName(column="StateCode", required = true)
-		private String stateCode;
+		private static String stateCode;
 		
-		public String getSerialNO() {
+		public  static String getSerialNO() {
 			return serialNo;
 		}
 		public void setSerialNo(String serialNo) {
 			this.serialNo = serialNo;
 		}
-		public String getStateName() {
+		public static String getStateName() {
 			return stateName;
 		}
 		public void setStateName(String state) {
 			this.stateName = state;
 		}
-		public String getTinNumber() {
+		public static String getTinNumber() {
 			return tinNumber;
 		}
 		public void setTinNumber(String tinNumber) {
 			this.tinNumber = tinNumber;
 		}
-		public String getStateCode() {
+		public static String getStateCode() {
 			return stateCode;
 		}
 		public void setStateCode(String stateCode) {

@@ -32,7 +32,7 @@ public class TestingStateCode {
 			Assert.assertEquals(28, count);
 					}
 		
-		public static String Wrong_StateCode_FileType = "C:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCode.txt";
+		public static String Wrong_StateCode_FileType = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCode.txt";
 		 // test to show that program throws exception when given wrong file type
 		@Test
 		public void givenWrongFileTypeShouldReturnException() throws ExceptionStateCensus
@@ -41,5 +41,17 @@ public class TestingStateCode {
 			logger.info("Count is : "+ count);
 			Assert.assertEquals(28, count);
 					}
+		
+		public static String StateCode_Delimeter = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCodeDeli.csv";
+
+
+		 // test to show that program throws exception when given wrong file type
+			@Test
+			public void givenWrongDelimeterInFile_ReturnCustomException() throws ExceptionStateCensus
+			{
+				int count =  StateCensusAnalyzer.readingStateCensusFromCSV(StateCode_Delimeter);
+				logger.info("Count is : "+ count);
+				Assert.assertEquals(28, count);
+						}
 
 }
