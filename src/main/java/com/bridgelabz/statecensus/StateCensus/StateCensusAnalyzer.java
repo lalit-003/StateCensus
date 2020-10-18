@@ -24,8 +24,8 @@ public class StateCensusAnalyzer {
 		
 		catch(NoSuchFileException e)
 		{
-			logger.warning("Not able to open file at specified path");
-		   throw new ExceptionStateCensus(CensusExceptionType.WRONG_FILE_NAME, "no such file exists at given file location");
+			logger.warning("You have provided wrong file path or Incorrect file type ");
+		   throw new ExceptionStateCensus(CensusExceptionType.WRONG_FILE_NAME, "no such file exists at given file location or incorrect file type ");
 		}
 		catch(IOException e)
 		{
