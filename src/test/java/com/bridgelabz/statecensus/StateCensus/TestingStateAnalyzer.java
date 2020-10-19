@@ -117,7 +117,7 @@ public class TestingStateAnalyzer {
 						Assert.assertEquals(28, count);
 								}
 					
-					public static String StateCode_Header = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCodeDeliHeader.csv";
+					public static String StateCode_Header = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCodeHeader.csv";
 
 
 					 // test to show that program throws exception when given wrong delimeter input

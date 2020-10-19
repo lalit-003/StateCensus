@@ -19,7 +19,7 @@ package com.bridgelabz.statecensus.StateCensus;
 		public void setSerialNo(String serialNo) {
 			this.serialNo = serialNo;
 		}
-		public static String getStateName() {
+		public String getStateName() {
 			return stateName;
 		}
 		public void setStateName(String state) {

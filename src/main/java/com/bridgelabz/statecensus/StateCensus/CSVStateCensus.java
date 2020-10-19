@@ -4,7 +4,7 @@ import com.opencsv.bean.CsvBindByName;
 
 public class CSVStateCensus {
 	@CsvBindByName(column = "State")
-    private static String stateName;
+    private  String stateName;
 
     @CsvBindByName(column = "Population")
     private static String population;
@@ -28,7 +28,7 @@ public class CSVStateCensus {
 	}
 
 
-	public static String getStateName() {
+	public String getStateName() {
         return stateName;
     }
 
