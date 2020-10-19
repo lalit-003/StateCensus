@@ -27,6 +27,7 @@ public class TestingStateAnalyzer {
 			public void checkingNumberOfStatesSadCase() throws ExceptionStateCensus
 			{
 				int count =  StateCensusAnalyzer.readingStateCensusFromCSV(StateCensus_FilePath);
+				logger.info("Count is : "+ count);
 				Assert.assertEquals(0,count);
 			}
 
@@ -64,7 +65,7 @@ public class TestingStateAnalyzer {
 							}
 			
 				public static String StateCensus_Header = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\StateCensusHeader.csv";
-				 // test to show that program throws exception when there is incoorect header definition
+				 // test to show that program throws exception when there is incorrect header definition
 				@Test
 				public void givenWrongHeaderInCSVFile_ReturnCustomException() throws ExceptionStateCensus
 				{
@@ -125,7 +126,7 @@ public class TestingStateAnalyzer {
 						@Test
 						public void givenWrongHeaderInFile_ReturnCustomExceptionInStateCode() throws ExceptionStateCensus
 						{
-							int count =  StateCensusAnalyzer.readingStateCodeFromCSV(StateCode_Delimeter);
+							int count =  StateCensusAnalyzer.readingStateCodeFromCSV(StateCode_Header);
 							logger.info("Count is : "+ count);
 							Assert.assertEquals(28, count);
 									}
