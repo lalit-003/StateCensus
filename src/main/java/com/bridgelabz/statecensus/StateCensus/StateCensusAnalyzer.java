@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import java.io.Reader;
+import java.lang.System.Logger;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
+import java.util.logging.LogManager;
 
 import com.bridgelabz.statecensus.StateCensus.ExceptionStateCensus.CensusExceptionType;
 import com.opencsv.bean.CsvToBean;
@@ -14,13 +16,15 @@ import com.opencsv.bean.CsvToBeanBuilder;
 
 public class StateCensusAnalyzer {
 	static int count = 0;
-
+	
 	public static <E> int readingStateDataFromCSV(String filePath, E className) throws ExceptionStateCensus {
 		Reader reader = null;
 		try {
 			reader = Files.newBufferedReader(Paths.get(filePath));
 			CsvToBean<CSVStateCensus> csvToBean = new CsvToBeanBuilder<CSVStateCensus>(reader)
-					.withType(CSVStateCensus.class).withIgnoreLeadingWhiteSpace(true).build();
+					                              .withType(CSVStateCensus.class)
+					                              .withIgnoreLeadingWhiteSpace(true)
+					                              .build();
 
 			BufferedReader bufferReader = new BufferedReader(reader);
 			String line = "";
