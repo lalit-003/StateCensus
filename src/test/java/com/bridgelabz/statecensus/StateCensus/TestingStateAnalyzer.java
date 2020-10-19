@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-public class TestingStateCensus {
+public class TestingStateAnalyzer {
 
 	  public static String StateCensus_FilePath = "D:\\FileIO\\demo\\StateCensus.csv";
 
@@ -72,6 +72,67 @@ public class TestingStateCensus {
 					logger.info("Count is : "+ count);
 					Assert.assertEquals(29, count);
 							}
+
+				public static String StateCode_FilePath = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCode.csv";
+				// Test to check number of entries in csv file using iterator
+				@Test
+				public void checkingNumberOfStatesInStateCode() throws ExceptionStateCensus
+				{
+					int count =  StateCensusAnalyzer.readingStateCodeFromCSV(StateCode_FilePath);
+					logger.info("Count is : "+ count);
+					Assert.assertEquals(37, count);
+				}
+				
+				public static String Wrong_StateCode_FilePath = "C:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCode.csv";
+
+				 // test to show that program throws exception when given wrong file path 
+				@Test
+				public void givenWrongFilePathShouldReturnExceptionInStateCode() throws ExceptionStateCensus
+				{
+					int count =  StateCensusAnalyzer.readingStateCodeFromCSV(Wrong_StateCode_FilePath);
+					logger.info("Count is : "+ count);
+					Assert.assertEquals(28, count);
+							}
+				
+				public static String Wrong_StateCode_FileType = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCode.txt";
+				 // test to show that program throws exception when given wrong file type
+				@Test
+				public void givenWrongFileTypeShouldReturnExceptionInStateCode() throws ExceptionStateCensus
+				{
+					int count =  StateCensusAnalyzer.readingStateCodeFromCSV(Wrong_StateCode_FileType);
+					logger.info("Count is : "+ count);
+					Assert.assertEquals(28, count);
+							}
+				
+				public static String StateCode_Delimeter = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCodeDeli.csv";
+
+
+				 // test to show that program throws exception when given wrong delimeter input
+				
+					@Test
+					public void givenWrongDelimeterInFile_ReturnCustomExceptionInStateCode() throws ExceptionStateCensus
+					{
+						int count =  StateCensusAnalyzer.readingStateCodeFromCSV(StateCode_Delimeter);
+						logger.info("Count is : "+ count);
+						Assert.assertEquals(28, count);
+								}
+					
+					public static String StateCode_Header = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCodeDeliHeader.csv";
+
+
+					 // test to show that program throws exception when given wrong delimeter input
+					
+						@Test
+						public void givenWrongHeaderInFile_ReturnCustomExceptionInStateCode() throws ExceptionStateCensus
+						{
+							int count =  StateCensusAnalyzer.readingStateCodeFromCSV(StateCode_Delimeter);
+							logger.info("Count is : "+ count);
+							Assert.assertEquals(28, count);
+									}
+
+
+
+				
 
 
 }
