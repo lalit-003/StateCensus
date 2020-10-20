@@ -3,17 +3,15 @@ package com.bridgelabz.statecensus.StateCensus;
 
 public class ExceptionStateCensus extends Exception {
 
-	enum CensusExceptionType
-	{
-		WRONG_FILE_NAME,INCORRECT_FILE_TYPE,INCORRECT_DATA_IN_FILE_OR_INCORRECT_HEADER,OTHER_IO_EXCEPTION,INVALID_CLASS
-	}
-	CensusExceptionType type;
-	String message;
 
-	public ExceptionStateCensus(CensusExceptionType type,String message)
-	{
-				super(message);
-				System.out.println(message);
-				this.type = type;
+	public enum ExceptionType{
+		INVALID_FILE_PATH,INVALID_CLASS_TYPE, INVALID_DELIMITER,INVALID_HEADER
+	}
+	public ExceptionType type;
+
+	public  ExceptionStateCensus(String message,ExceptionType type) {
+		super(message);
+		System.out.println(message);
+		this.type = type;
 	}
 }

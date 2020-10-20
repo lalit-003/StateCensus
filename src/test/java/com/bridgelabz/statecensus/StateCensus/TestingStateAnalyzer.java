@@ -8,13 +8,13 @@ import org.junit.Test;
 public class TestingStateAnalyzer {
 
 	public static String StateCensus_FilePath = "D:\\FileIO\\demo\\StateCensus.csv";
-	StateCensusAnalyzer stateCensusAnalyzer = new StateCensusAnalyzer();
-	Logger logger = Logger.getLogger(StateCensusAnalyzer.class.getName());
+	StateAnalyzer stateAnalyzer = new StateAnalyzer();
+	Logger logger = Logger.getLogger(StateAnalyzer.class.getName());
 
 	// Test to check number of entries in csv file using iterator
 	@Test
 	public void checkingNumberOfStates() throws ExceptionStateCensus {
-		int count = StateCensusAnalyzer.readingStateDataFromCSV(StateCensus_FilePath, CSVStateCensus.class);
+		int count = stateAnalyzer.loadCensusData(StateCensus_FilePath);
 		logger.info("Count is : " + count);
 		Assert.assertEquals(29, count);
 	}
@@ -23,7 +23,7 @@ public class TestingStateAnalyzer {
 	// Sad Test Case
 	@Test
 	public void checkingNumberOfStatesSadCase() throws ExceptionStateCensus {
-		int count = StateCensusAnalyzer.readingStateDataFromCSV(StateCensus_FilePath, CSVStateCensus.class);
+		int count = stateAnalyzer.loadCensusData(StateCensus_FilePath);
 		logger.info("Count is : " + count);
 		Assert.assertEquals(0, count);
 	}
@@ -32,7 +32,7 @@ public class TestingStateAnalyzer {
 	// test to show that program throws exception when given wrong file path
 	@Test
 	public void givenWrongFilePathShouldReturnException() throws ExceptionStateCensus {
-		int count = StateCensusAnalyzer.readingStateDataFromCSV(Wrong_StateCensus_FilePath, CSVStateCensus.class);
+		int count = stateAnalyzer.loadCensusData(Wrong_StateCensus_FilePath);
 		logger.info("Count is : " + count);
 		Assert.assertEquals(29, count);
 	}
@@ -41,7 +41,7 @@ public class TestingStateAnalyzer {
 	// test to show that program throws exception when given wrong file type
 	@Test
 	public void givenWrongFileTypeShouldReturnException() throws ExceptionStateCensus {
-		int count = StateCensusAnalyzer.readingStateDataFromCSV(Wrong_StateCode_FileType, CSVStateCensus.class);
+		int count = stateAnalyzer.loadCensusData(Wrong_StateCensus_FileType);
 		logger.info("Count is : " + count);
 		Assert.assertEquals(29, count);
 	}
@@ -51,7 +51,7 @@ public class TestingStateAnalyzer {
 	// test to show that program throws exception when given wrong file type
 	@Test
 	public void givenWrongDelimeterInFile_ReturnCustomException() throws ExceptionStateCensus {
-		int count = StateCensusAnalyzer.readingStateDataFromCSV(StateCensus_Delimeter, CSVStateCensus.class);
+		int count = stateAnalyzer.loadCensusData(StateCensus_Delimeter);
 		logger.info("Count is : " + count);
 		Assert.assertEquals(29, count);
 	}
@@ -61,7 +61,7 @@ public class TestingStateAnalyzer {
 	// definition
 	@Test
 	public void givenWrongHeaderInCSVFile_ReturnCustomException() throws ExceptionStateCensus {
-		int count = StateCensusAnalyzer.readingStateDataFromCSV(StateCensus_Header, CSVStateCensus.class);
+		int count = stateAnalyzer.loadCensusData(StateCensus_Header);
 		logger.info("Count is : " + count);
 		Assert.assertEquals(29, count);
 	}
@@ -72,7 +72,7 @@ public class TestingStateAnalyzer {
 	// Test to check number of entries in csv file using iterator
 	@Test
 	public void checkingNumberOfStatesInStateCode() throws ExceptionStateCensus {
-		int count = StateCensusAnalyzer.readingStateDataFromCSV(StateCode_FilePath, CSVStateCode.class);
+		int count = stateAnalyzer.loadCodeData(StateCode_FilePath);
 		logger.info("Count is : " + count);
 		Assert.assertEquals(37, count);
 	}
@@ -81,8 +81,7 @@ public class TestingStateAnalyzer {
 	// test to show that program throws exception when given wrong file path
 	@Test
 	public void givenWrongFilePathShouldReturnExceptionInStateCode() throws ExceptionStateCensus {
-		int count = StateCensusAnalyzer.readingStateDataFromCSV(Wrong_StateCode_FilePath, CSVStateCode.class);
-
+		int count = stateAnalyzer.loadCodeData(Wrong_StateCode_FilePath);
 		logger.info("Count is : " + count);
 		Assert.assertEquals(37, count);
 	}
@@ -91,7 +90,7 @@ public class TestingStateAnalyzer {
 	// test to show that program throws exception when given wrong file type
 	@Test
 	public void givenWrongFileTypeShouldReturnExceptionInStateCode() throws ExceptionStateCensus {
-		int count = StateCensusAnalyzer.readingStateDataFromCSV(Wrong_StateCode_FileType, CSVStateCode.class);
+		int count = stateAnalyzer.loadCodeData(Wrong_StateCensus_FileType);
 		logger.info("Count is : " + count);
 		Assert.assertEquals(37, count);
 	}
@@ -100,18 +99,18 @@ public class TestingStateAnalyzer {
 	// test to show that program throws exception when given wrong delimeter input
 	@Test
 	public void givenWrongDelimeterInFile_ReturnCustomExceptionInStateCode() throws ExceptionStateCensus {
-		int count = StateCensusAnalyzer.readingStateDataFromCSV(StateCode_Delimeter, CSVStateCode.class);
+		int count = stateAnalyzer.loadCodeData(StateCode_Delimeter);
 		logger.info("Count is : " + count);
-		Assert.assertEquals(28, count);
+		Assert.assertEquals(37, count);
 	}
 
 	public static String StateCode_Header = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCodeHeader.csv";
 	// test to show that program throws exception when given wrong delimeter input
 	@Test
 	public void givenWrongHeaderInFile_ReturnCustomExceptionInStateCode() throws ExceptionStateCensus {
-		int count = StateCensusAnalyzer.readingStateDataFromCSV(StateCode_Header, CSVStateCode.class);
+		int count = stateAnalyzer.loadCodeData(StateCode_Header);
 		logger.info("Count is : " + count);
-		Assert.assertEquals(28, count);
+		Assert.assertEquals(37, count);
 	}
 
 }
