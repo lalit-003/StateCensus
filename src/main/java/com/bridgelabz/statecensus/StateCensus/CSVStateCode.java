@@ -13,32 +13,7 @@ package com.bridgelabz.statecensus.StateCensus;
 		@CsvBindByName(column="StateCode", required = true)
 		private static String stateCode;
 		
-		public  static String getSerialNO() {
-			return serialNo;
-		}
-		public void setSerialNo(String serialNo) {
-			this.serialNo = serialNo;
-		}
-		public String getStateName() {
-			return stateName;
-		}
-		public void setStateName(String state) {
-			this.stateName = state;
-		}
-		public static String getTinNumber() {
-			return tinNumber;
-		}
-		public void setTinNumber(String tinNumber) {
-			this.tinNumber = tinNumber;
-		}
-		public static String getStateCode() {
-			return stateCode;
-		}
-		public void setStateCode(String stateCode) {
-			this.stateCode = stateCode;
-		}
-	   
-		@Override
+				@Override
 	    public String toString() {
 	        return  "SerialNumber =" + serialNo +  
 	                ", State=" + stateName +
