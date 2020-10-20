@@ -6,11 +6,12 @@ import java.util.Iterator;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.exceptions.CsvException;
 
 public class OpenCSVBuilder<E> implements ICSVBuilder<E>  {
 	
 		@Override
-		public Iterator<E> getIterator(Reader reader, Class className) throws ExceptionStateCensus  {
+		public Iterator<E> getIterator(Reader reader, Class className) throws CsvException  {
 			try {
 				CsvToBeanBuilder<E> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
 				csvToBeanBuilder.withType(className);
@@ -18,8 +19,7 @@ public class OpenCSVBuilder<E> implements ICSVBuilder<E>  {
 				CsvToBean<E> csvToBean = csvToBeanBuilder.build();
 				return csvToBean.iterator();
 			} catch (IllegalStateException e) {
-				throw new ExceptionStateCensus(
-						e.getMessage(),ExceptionStateCensus.ExceptionType.INVALID_FILE_PATH);
+				throw new  CsvException();
 			}
 		}
 }
