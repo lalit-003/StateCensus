@@ -9,12 +9,13 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 
 import com.bridgelabz.statecensus.StateCensus.ExceptionStateCensus.ExceptionType;
+import com.opencsv.exceptions.CsvException;
 
 
 public class StateAnalyzer {
 	static int count = 0;
 
-	public int loadCensusData(String filePath) throws ExceptionStateCensus {
+	public int loadCensusData(String filePath) throws ExceptionStateCensus, CsvException {
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(filePath));
 			ICSVBuilder csvBuilder = BuilderFactoryCSV.generateBuilder();
@@ -48,7 +49,7 @@ public class StateAnalyzer {
 	}
 
 
-	public int loadCodeData(String filePath) throws ExceptionStateCensus {
+	public int loadCodeData(String filePath) throws ExceptionStateCensus, CsvException {
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(filePath));
 			ICSVBuilder csvBuilder = BuilderFactoryCSV.generateBuilder();
