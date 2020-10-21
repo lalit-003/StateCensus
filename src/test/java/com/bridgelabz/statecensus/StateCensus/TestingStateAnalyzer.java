@@ -175,6 +175,20 @@ public class TestingStateAnalyzer {
 					 Assert.assertEquals("Bihar",csvStateCensus[0].stateName);
 					 Assert.assertEquals("Arunachal Pradesh",csvStateCensus[28].stateName);
 				}
+				
+				// to sort state census data on basis of state area from high to low
+				@Test
+				public void givenStateCensusData_ShouldSortOnArea() throws ExceptionStateCensus,CsvException
+				{
+					stateAnalyzer.loadCensusData(StateCensus_FilePath);
+					String sortedCenusData = stateAnalyzer.getAreaWiseSortedCensusData(StateCensus_FilePath);
+					 CSVStateCensus[] csvStateCensus = new Gson().fromJson(sortedCenusData,CSVStateCensus[].class);
+					 logger.info("first state is  : " +csvStateCensus[0].getStateName() );
+					 logger.info("last state is  : " +csvStateCensus[28].getStateName());
+					 Assert.assertEquals("Rajasthan",csvStateCensus[0].stateName);
+					 Assert.assertEquals("Goa",csvStateCensus[28].stateName);
+				}
+
 
 
 }
