@@ -19,12 +19,12 @@ public class StateAnalyzer {
 
 	ICSVBuilder csvBuilder = BuilderFactoryCSV.generateBuilder();
 	List<CSVStateCensus> listCensus = null;
-	List<CSVStateCode> listStateCode = null; 
-	
+	List<CSVStateCode> listStateCode = null;
+
 	public int loadCensusData(String filePath) throws ExceptionStateCensus {
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(filePath));
-			 listCensus = csvBuilder.getList(reader, CSVStateCensus.class);
+			listCensus = csvBuilder.getList(reader, CSVStateCensus.class);
 			int listSize = listCensus.size();
 			checkHeaderException(filePath, CSVStateCensus.class);
 			return listSize;
@@ -33,18 +33,15 @@ public class StateAnalyzer {
 					ExceptionType.INVALID_FILE_PATH);
 		} catch (IllegalStateException a) {
 			throw new ExceptionStateCensus("Incorrect class type for StateCensus ", ExceptionType.INVALID_CLASS_TYPE);
-		}
-		catch(RuntimeException a)
-		{
-			throw new ExceptionStateCensus("Invalid delimiter  in StateCensus file",
-					ExceptionType.INVALID_DELIMITER);
+		} catch (RuntimeException a) {
+			throw new ExceptionStateCensus("Invalid delimiter  in StateCensus file", ExceptionType.INVALID_DELIMITER);
 		}
 	}
 
 	public int loadCodeData(String filePath) throws ExceptionStateCensus {
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(filePath));
-			 listStateCode = csvBuilder.getList(reader, CSVStateCode.class);
+			listStateCode = csvBuilder.getList(reader, CSVStateCode.class);
 			int listSize = listStateCode.size();
 			this.checkHeaderException(filePath, CSVStateCode.class);
 			return listSize;
@@ -56,38 +53,35 @@ public class StateAnalyzer {
 		}
 
 	}
-	
-	public void checkHeaderException(String filePath,Class className) throws ExceptionStateCensus
-	{
-		try
-		{
-			BufferedReader bufferReader = new BufferedReader(new FileReader(filePath));
-		String line = "";
-		int count = 0;
-		while ((line = bufferReader.readLine()) != null) {
-			String[] headers = line.split(",");
-			if (count != 0 && (headers[0].equals("") || headers[1].equals("") || headers[2].equals("") || headers[3].equals("")))
-						{
-				throw new ExceptionStateCensus("Invalid delimiter  in StateCensus file",
-						ExceptionType.INVALID_DELIMITER);
-			}
-			if (count == 0 && ((className.equals(CSVStateCensus.class ) &&  ((!headers[0].equals("State") || !headers[1].equals("Population")
-					|| !headers[2].equals("AreaInSqKm") || !headers[3].equals("DensityPerSqKm")))) || 
-					(className.equals(CSVStateCode.class) &&  (!headers[0].equals("SrNo") || !headers[1].equals("State Name")
-							|| !headers[2].equals("TIN") || !headers[3].equals("StateCode"))))) {
-				throw new ExceptionStateCensus("Invalid header is there in StateCensus CSV file",
-						ExceptionType.INVALID_HEADER);
-			}
-			count++;
-		}
-		bufferReader.close();
-		}
-		catch (IOException e)
-		{
-			System.out.println("IO Exception with message :"+e.getMessage());
-		}
-			}
 
+	public void checkHeaderException(String filePath, Class className) throws ExceptionStateCensus {
+		try {
+			BufferedReader bufferReader = new BufferedReader(new FileReader(filePath));
+			String line = "";
+			int count = 0;
+			while ((line = bufferReader.readLine()) != null) {
+				String[] headers = line.split(",");
+				if (count != 0 && (headers[0].equals("") || headers[1].equals("") || headers[2].equals("")
+						|| headers[3].equals(""))) {
+					throw new ExceptionStateCensus("Invalid delimiter  in StateCensus file",
+							ExceptionType.INVALID_DELIMITER);
+				}
+				if (count == 0 && ((className.equals(CSVStateCensus.class)
+						&& ((!headers[0].equals("State") || !headers[1].equals("Population")
+								|| !headers[2].equals("AreaInSqKm") || !headers[3].equals("DensityPerSqKm"))))
+						|| (className.equals(CSVStateCode.class)
+								&& (!headers[0].equals("SrNo") || !headers[1].equals("State Name")
+										|| !headers[2].equals("TIN") || !headers[3].equals("StateCode"))))) {
+					throw new ExceptionStateCensus("Invalid header is there in StateCensus CSV file",
+							ExceptionType.INVALID_HEADER);
+				}
+				count++;
+			}
+			bufferReader.close();
+		} catch (IOException e) {
+			System.out.println("IO Exception with message :" + e.getMessage());
+		}
+	}
 
 	private <E> int getCount(Iterator<E> iterator) {
 		int entries = 0;
@@ -100,123 +94,120 @@ public class StateAnalyzer {
 
 	public String getStateWiseSortedCensusData(String filePath) throws ExceptionStateCensus {
 		// TODO Auto-generated method stub
-		if(listCensus==null || listCensus.size()==0)
-		{
+		if (listCensus == null || listCensus.size() == 0) {
 			throw new ExceptionStateCensus("Empty state census list", ExceptionType.NO_CENSUS_DATA);
 		}
-			Comparator<CSVStateCensus> csvStateCensusComparator = Comparator.comparing(census ->census.getStateName());
-			this.sortStateCensus("ascending",csvStateCensusComparator);
-			String sortedStateCensusJson = new Gson().toJson(listCensus);
-			return sortedStateCensusJson;
+		Comparator<CSVStateCensus> csvStateCensusComparator = Comparator.comparing(census -> census.getStateName());
+		this.sortStateCensus("ascending", csvStateCensusComparator);
+		String sortedStateCensusJson = new Gson().toJson(listCensus);
+		return sortedStateCensusJson;
 	}
 
-	private void sortStateCensus( String order ,Comparator<CSVStateCensus> csvStateCensusComparator) {
+	private void sortStateCensus(String order, Comparator<CSVStateCensus> csvStateCensusComparator) {
 		// TODO Auto-generated method stub
-		for (int i=0;i<listCensus.size()-1;i++)
-		{
-			for(int j=0;j<listCensus.size()-i-1;j++)
-			{
+		for (int i = 0; i < listCensus.size() - 1; i++) {
+			for (int j = 0; j < listCensus.size() - i - 1; j++) {
 				CSVStateCensus census1 = listCensus.get(j);
-				CSVStateCensus census2 = listCensus.get(j+1);
-				switch(order)
-				{
+				CSVStateCensus census2 = listCensus.get(j + 1);
+				switch (order) {
 				case "ascending":
-				if(csvStateCensusComparator.compare(census1,census2)>0)
-				{
-					listCensus.set(j, census2);
-					listCensus.set(j+1, census1);
-				}
-				break;
-				case "descending":
-					if(csvStateCensusComparator.compare(census1,census2)<0)
-					{
+					if (csvStateCensusComparator.compare(census1, census2) > 0) {
 						listCensus.set(j, census2);
-						listCensus.set(j+1, census1);
+						listCensus.set(j + 1, census1);
 					}
-                    break;
-                    
-                    default:
-                    	System.out.println("Incorrect order mentioned");
+					break;
+				case "descending":
+					if (csvStateCensusComparator.compare(census1, census2) < 0) {
+						listCensus.set(j, census2);
+						listCensus.set(j + 1, census1);
+					}
+					break;
+
+				default:
+					System.out.println("Incorrect order mentioned");
 				}
 			}
 		}
-		for(int i=0;i<listCensus.size();i++)
-		{
-		System.out.println(listCensus.get(i));
+		for (int i = 0; i < listCensus.size(); i++) {
+			System.out.println(listCensus.get(i));
 		}
 
-			}
-	
-	
-	public String getStateCodeWiseSortedCodeData(String stateCode_FilePath) throws ExceptionStateCensus {
-		if(listStateCode==null || listStateCode.size()==0)
-		{
-			throw new ExceptionStateCensus("Empty state census list", ExceptionType.NO_CENSUS_DATA);
-		}
-			Comparator<CSVStateCode> csvStateCodeComparator = Comparator.comparing(code ->(code.getStateCode()));
-			this.sortStateCode(  "ascending",csvStateCodeComparator);
-			String sortedStateCodeJson = new Gson().toJson(listStateCode);
-			return sortedStateCodeJson;
 	}
 
-	private void sortStateCode(String order , Comparator<CSVStateCode> csvStateCodeComparator) {
+	public String getStateCodeWiseSortedCodeData(String stateCode_FilePath) throws ExceptionStateCensus {
+		if (listStateCode == null || listStateCode.size() == 0) {
+			throw new ExceptionStateCensus("Empty state census list", ExceptionType.NO_CENSUS_DATA);
+		}
+		Comparator<CSVStateCode> csvStateCodeComparator = Comparator.comparing(code -> (code.getStateCode()));
+		this.sortStateCode("ascending", csvStateCodeComparator);
+		String sortedStateCodeJson = new Gson().toJson(listStateCode);
+		return sortedStateCodeJson;
+	}
+
+	private void sortStateCode(String order, Comparator<CSVStateCode> csvStateCodeComparator) {
 		// TODO Auto-generated method stub
-		for (int i=0;i<listStateCode.size()-1;i++)
-		{
-			for(int j=0;j<listStateCode.size()-i-1;j++)
-			{
+		for (int i = 0; i < listStateCode.size() - 1; i++) {
+			for (int j = 0; j < listStateCode.size() - i - 1; j++) {
 				CSVStateCode code1 = listStateCode.get(j);
-				CSVStateCode code2 = listStateCode.get(j+1);
-				switch(order)
-				{
+				CSVStateCode code2 = listStateCode.get(j + 1);
+				switch (order) {
 				case "ascending":
-					if(csvStateCodeComparator.compare(code1,code2)>0)
-					{
+					if (csvStateCodeComparator.compare(code1, code2) > 0) {
 						listStateCode.set(j, code2);
-						listStateCode.set(j+1, code1);
+						listStateCode.set(j + 1, code1);
 					}
 
-				break;
+					break;
 				case "descending":
-					if(csvStateCodeComparator.compare(code1,code2)>0)
-					{
+					if (csvStateCodeComparator.compare(code1, code2) > 0) {
 						listStateCode.set(j, code2);
-						listStateCode.set(j+1, code1);
+						listStateCode.set(j + 1, code1);
 					}
-                    break;
-                    default:
-                    	System.out.println("Incorrect order mentioned");
+					break;
+				default:
+					System.out.println("Incorrect order mentioned");
 				}
 			}
 		}
-		for(int i=0;i<listStateCode.size();i++)
-		{
-		System.out.println(listStateCode.get(i));
+		for (int i = 0; i < listStateCode.size(); i++) {
+			System.out.println(listStateCode.get(i));
 		}
-				}
+	}
 
 	public String getPopulationWiseSortedCensusData(String stateCensus_FilePath) throws ExceptionStateCensus {
 		// TODO Auto-generated method stub
-				if(listCensus==null || listCensus.size()==0)
-				{
-					throw new ExceptionStateCensus("Empty state census list", ExceptionType.NO_CENSUS_DATA);
-				}
-					Comparator<CSVStateCensus> csvStateCensusComparator = Comparator.comparing(census ->Integer.parseInt(census.getPopulation()));
-					this.sortStateCensus("descending",csvStateCensusComparator);
-					String sortedStateCensusJson = new Gson().toJson(listCensus);
-					return sortedStateCensusJson;
+		if (listCensus == null || listCensus.size() == 0) {
+			throw new ExceptionStateCensus("Empty state census list", ExceptionType.NO_CENSUS_DATA);
+		}
+		Comparator<CSVStateCensus> csvStateCensusComparator = Comparator
+				.comparing(census -> Integer.parseInt(census.getPopulation()));
+		this.sortStateCensus("descending", csvStateCensusComparator);
+		String sortedStateCensusJson = new Gson().toJson(listCensus);
+		return sortedStateCensusJson;
 	}
-	
+
 	public String getPopulationDensityWiseSortedCensusData(String stateCensus_FilePath) throws ExceptionStateCensus {
 		// TODO Auto-generated method stub
-				if(listCensus==null || listCensus.size()==0)
-				{
-					throw new ExceptionStateCensus("Empty state census list", ExceptionType.NO_CENSUS_DATA);
-				}
-					Comparator<CSVStateCensus> csvStateCensusComparator = Comparator.comparing(census ->Integer.parseInt(census.getDensityPerSqKm()));
-					this.sortStateCensus("descending",csvStateCensusComparator);
-					String sortedStateCensusJson = new Gson().toJson(listCensus);
-					return sortedStateCensusJson;
+		if (listCensus == null || listCensus.size() == 0) {
+			throw new ExceptionStateCensus("Empty state census list", ExceptionType.NO_CENSUS_DATA);
+		}
+		Comparator<CSVStateCensus> csvStateCensusComparator = Comparator
+				.comparing(census -> Integer.parseInt(census.getDensityPerSqKm()));
+		this.sortStateCensus("descending", csvStateCensusComparator);
+		String sortedStateCensusJson = new Gson().toJson(listCensus);
+		return sortedStateCensusJson;
+	}
+
+	public String getAreaWiseSortedCensusData(String stateCensus_FilePath) throws ExceptionStateCensus {
+		// TODO Auto-generated method stub
+		if (listCensus == null || listCensus.size() == 0) {
+			throw new ExceptionStateCensus("Empty state census list", ExceptionType.NO_CENSUS_DATA);
+		}
+		Comparator<CSVStateCensus> csvStateCensusComparator = Comparator
+				.comparing(census -> Integer.parseInt(census.getAreaInSqKm()));
+		this.sortStateCensus("descending", csvStateCensusComparator);
+		String sortedStateCensusJson = new Gson().toJson(listCensus);
+		return sortedStateCensusJson;
 	}
 
 }
