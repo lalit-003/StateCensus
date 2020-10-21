@@ -70,10 +70,10 @@ public class StateAnalyzer {
 				throw new ExceptionStateCensus("Invalid delimiter  in StateCensus file",
 						ExceptionType.INVALID_DELIMITER);
 			}
-			if (count == 0 && (className.equals(CSVStateCensus.class ) &&  ((!headers[0].equals("State") || !headers[1].equals("Population")
+			if (count == 0 && ((className.equals(CSVStateCensus.class ) &&  ((!headers[0].equals("State") || !headers[1].equals("Population")
 					|| !headers[2].equals("AreaInSqKm") || !headers[3].equals("DensityPerSqKm")))) || 
 					(className.equals(CSVStateCode.class) &&  (!headers[0].equals("SrNo") || !headers[1].equals("State Name")
-							|| !headers[2].equals("TIN") || !headers[3].equals("StateCode")))) {
+							|| !headers[2].equals("TIN") || !headers[3].equals("StateCode"))))) {
 				throw new ExceptionStateCensus("Invalid header is there in StateCensus CSV file",
 						ExceptionType.INVALID_HEADER);
 			}
@@ -126,4 +126,33 @@ public class StateAnalyzer {
 			}
 		}
 	}
+
+	public String getStateCodeWiseSortedCodeData(String stateCode_FilePath) throws ExceptionStateCensus {
+		if(listStateCode==null || listStateCode.size()==0)
+		{
+			throw new ExceptionStateCensus("Empty state census list", ExceptionType.NO_CENSUS_DATA);
+		}
+			Comparator<CSVStateCode> csvStateCodeComparator = Comparator.comparing(code ->code.getStateCode());
+			this.sortStateCode(csvStateCodeComparator);
+			String sortedStateCodeJson = new Gson().toJson(listStateCode);
+			return sortedStateCodeJson;
+	}
+
+	private void sortStateCode(Comparator<CSVStateCode> csvStateCodeComparator) {
+		// TODO Auto-generated method stub
+		for (int i=0;i<listStateCode.size()-1;i++)
+		{
+			for(int j=0;j<listStateCode.size()-i-1;j++)
+			{
+				CSVStateCode code1 = listStateCode.get(j);
+				CSVStateCode code2 = listStateCode.get(j+1);
+				if(csvStateCodeComparator.compare(code1,code2)>0)
+				{
+					listStateCode.set(j, code2);
+					listStateCode.set(j+1, code1);
+				}
+
+			}
+		}
+			}
 }
