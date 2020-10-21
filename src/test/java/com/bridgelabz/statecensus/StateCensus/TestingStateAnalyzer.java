@@ -136,4 +136,18 @@ public class TestingStateAnalyzer {
 		 Assert.assertEquals("Andhra Pradesh",csvStateCensus[0].stateName);
 		 Assert.assertEquals("West Bengal",csvStateCensus[28].stateName);
 	}
+	
+	// to sort state code data on basis of statecode
+		@Test
+		public void givenStateCodeData_ShouldSortOnStateCode() throws ExceptionStateCensus,CsvException
+		{
+			stateAnalyzer.loadCodeData(StateCode_FilePath);
+			String sortedCodeData = stateAnalyzer.getStateCodeWiseSortedCodeData(StateCode_FilePath);
+			 CSVStateCode[] csvStateCode = new Gson().fromJson(sortedCodeData,CSVStateCode[].class);
+			 logger.info("first state code is  : " +csvStateCode[0].getStateCode() );
+			 logger.info("last state code is  : " +csvStateCode[36].getStateCode());
+			 Assert.assertEquals("AD",csvStateCode[0].getStateCode());
+		     Assert.assertEquals("WB ",csvStateCode[36].getStateCode());
+		}
+
 }
