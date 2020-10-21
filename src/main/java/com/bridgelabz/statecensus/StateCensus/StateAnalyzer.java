@@ -140,6 +140,11 @@ public class StateAnalyzer {
 				}
 			}
 		}
+		for(int i=0;i<listCensus.size();i++)
+		{
+		System.out.println(listCensus.get(i));
+		}
+
 			}
 	
 	
@@ -182,11 +187,13 @@ public class StateAnalyzer {
                     default:
                     	System.out.println("Incorrect order mentioned");
 				}
-
-				
 			}
 		}
-			}
+		for(int i=0;i<listStateCode.size();i++)
+		{
+		System.out.println(listStateCode.get(i));
+		}
+				}
 
 	public String getPopulationWiseSortedCensusData(String stateCensus_FilePath) throws ExceptionStateCensus {
 		// TODO Auto-generated method stub
@@ -199,4 +206,17 @@ public class StateAnalyzer {
 					String sortedStateCensusJson = new Gson().toJson(listCensus);
 					return sortedStateCensusJson;
 	}
+	
+	public String getPopulationDensityWiseSortedCensusData(String stateCensus_FilePath) throws ExceptionStateCensus {
+		// TODO Auto-generated method stub
+				if(listCensus==null || listCensus.size()==0)
+				{
+					throw new ExceptionStateCensus("Empty state census list", ExceptionType.NO_CENSUS_DATA);
+				}
+					Comparator<CSVStateCensus> csvStateCensusComparator = Comparator.comparing(census ->Integer.parseInt(census.getDensityPerSqKm()));
+					this.sortStateCensus("descending",csvStateCensusComparator);
+					String sortedStateCensusJson = new Gson().toJson(listCensus);
+					return sortedStateCensusJson;
+	}
+
 }
