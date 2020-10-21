@@ -3,8 +3,7 @@ package com.bridgelabz.statecensus.StateCensus;
 import com.opencsv.bean.CsvBindByName;
 
 public class CSVStateCensus {
-	@CsvBindByName(column = "State")
-	private String stateName;
+	@CsvBindByName(column = "State") String stateName;
 	@CsvBindByName(column = "Population", required = true)
 	private String population;
 	@CsvBindByName(column = "AreaInSqKm")

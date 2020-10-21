@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.google.gson.Gson;
 import com.opencsv.exceptions.CsvException;
 
 public class TestingStateAnalyzer {
@@ -122,5 +123,17 @@ public class TestingStateAnalyzer {
 		logger.info("Count is : " + count);
 		Assert.assertEquals(37, count);
 	}
-//
+	
+	// to sort state census data on basis of stateName
+	@Test
+	public void givenStateCensusData_ShouldSortOnState() throws ExceptionStateCensus,CsvException
+	{
+		stateAnalyzer.loadCensusData(StateCensus_FilePath);
+		String sortedCenusData = stateAnalyzer.getStateWiseSortedCensusData(StateCensus_FilePath);
+		 CSVStateCensus[] csvStateCensus = new Gson().fromJson(sortedCenusData,CSVStateCensus[].class);
+		 logger.info("first state is  : " +csvStateCensus[0].getStateName() );
+		 logger.info("last state is  : " +csvStateCensus[28].getStateName());
+		 Assert.assertEquals("Andhra Pradesh",csvStateCensus[0].stateName);
+		 Assert.assertEquals("West Bengal",csvStateCensus[28].stateName);
+	}
 }
