@@ -4,9 +4,11 @@ import java.util.List;
 import java.io.Reader;
 import java.util.Iterator;
 
+import com.bridgelabz.statecensus.StateCensus.ExceptionStateCensus.ExceptionType;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.exceptions.CsvException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 public class OpenCSVBuilder<E> implements ICSVBuilder<E> {
 
@@ -23,7 +25,7 @@ public class OpenCSVBuilder<E> implements ICSVBuilder<E> {
 		} catch (IllegalStateException e) {
 			throw new ExceptionStateCensus(e.getMessage(), ExceptionStateCensus.ExceptionType.INVALID_FILE_PATH);
 		}
-	}
+			}
 
 	@Override
 	public List getList(Reader reader, Class className) throws ExceptionStateCensus {
