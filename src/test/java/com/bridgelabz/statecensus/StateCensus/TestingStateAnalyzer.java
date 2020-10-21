@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.bridgelabz.statecensus.StateJAR.ExceptionStateCensus;
 import com.opencsv.exceptions.CsvException;
 
 public class TestingStateAnalyzer {
@@ -32,6 +31,7 @@ public class TestingStateAnalyzer {
 	}
 
 	public static String Wrong_StateCensus_FilePath = "C:\\FileIO\\demo\\StateCensus.csv";
+
 	// test to show that program throws exception when given wrong file path
 	@Test
 	public void givenWrongFilePathShouldReturnException() throws ExceptionStateCensus, CsvException {
@@ -41,6 +41,7 @@ public class TestingStateAnalyzer {
 	}
 
 	public static String Wrong_StateCensus_FileType = "D:\\FileIO\\demo\\StateCensus.txt";
+
 	// test to show that program throws exception when given wrong file type
 	@Test
 	public void givenWrongFileTypeShouldReturnException() throws ExceptionStateCensus, CsvException {
@@ -60,6 +61,7 @@ public class TestingStateAnalyzer {
 	}
 
 	public static String StateCensus_Header = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\StateCensusHeader.csv";
+
 	// test to show that program throws exception when there is incorrect header
 	// definition
 	@Test
@@ -72,6 +74,7 @@ public class TestingStateAnalyzer {
 	// TESTS FOR STATE CODE CLASS STARTS HERE
 
 	public static String StateCode_FilePath = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCode.csv";
+
 	// Test to check number of entries in csv file using iterator
 	@Test
 	public void checkingNumberOfStatesInStateCode() throws ExceptionStateCensus, CsvException {
@@ -81,6 +84,7 @@ public class TestingStateAnalyzer {
 	}
 
 	public static String Wrong_StateCode_FilePath = "C:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCode.csv";
+
 	// test to show that program throws exception when given wrong file path
 	@Test
 	public void givenWrongFilePathShouldReturnExceptionInStateCode() throws ExceptionStateCensus, CsvException {
@@ -90,6 +94,7 @@ public class TestingStateAnalyzer {
 	}
 
 	public static String Wrong_StateCode_FileType = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCode.txt";
+
 	// test to show that program throws exception when given wrong file type
 	@Test
 	public void givenWrongFileTypeShouldReturnExceptionInStateCode() throws ExceptionStateCensus, CsvException {
@@ -99,6 +104,7 @@ public class TestingStateAnalyzer {
 	}
 
 	public static String StateCode_Delimeter = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCodeDeli.csv";
+
 	// test to show that program throws exception when given wrong delimeter input
 	@Test
 	public void givenWrongDelimeterInFile_ReturnCustomExceptionInStateCode() throws ExceptionStateCensus, CsvException {
@@ -108,6 +114,7 @@ public class TestingStateAnalyzer {
 	}
 
 	public static String StateCode_Header = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\IndianStateCodeHeader.csv";
+
 	// test to show that program throws exception when given wrong delimeter input
 	@Test
 	public void givenWrongHeaderInFile_ReturnCustomExceptionInStateCode() throws ExceptionStateCensus, CsvException {
