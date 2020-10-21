@@ -1,10 +1,8 @@
 package com.bridgelabz.statecensus.StateCensus;
 
 import java.util.logging.Logger;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.google.gson.Gson;
 import com.opencsv.exceptions.CsvException;
 
@@ -15,7 +13,6 @@ public class TestingStateAnalyzer {
 	public static String Wrong_StateCensus_FileType = "D:\\FileIO\\demo\\StateCensus.txt";
 	public static String StateCensus_Delimeter = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\resources\\StateCensusDeli.csv";
 	public static String StateCensus_Header = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\resources\\StateCensusHeader.csv";
-
 
 	public static String StateCode_FilePath = "D:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\resources\\IndianStateCode.csv";
 	public static String Wrong_StateCode_FilePath = "C:\\BridgeLabz-Fellowship\\IndianStatesCensus\\StateCensus\\resources\\IndianStateCode.csv";
@@ -43,7 +40,6 @@ public class TestingStateAnalyzer {
 		Assert.assertEquals(0, count);
 	}
 
-
 	// test to show that program throws exception when given wrong file path
 	@Test
 	public void givenWrongFilePathShouldReturnException() throws ExceptionStateCensus, CsvException {
@@ -67,7 +63,7 @@ public class TestingStateAnalyzer {
 		logger.info("Count is : " + count);
 		Assert.assertEquals(29, count);
 	}
-		
+
 	// test to show that program throws exception when there is incorrect header
 	// definition
 	@Test
@@ -79,7 +75,6 @@ public class TestingStateAnalyzer {
 
 	// TESTS FOR STATE CODE CLASS STARTS HERE
 
-	
 	// Test to check number of entries in csv file using iterator
 	@Test
 	public void checkingNumberOfStatesInStateCode() throws ExceptionStateCensus, CsvException {
@@ -88,7 +83,6 @@ public class TestingStateAnalyzer {
 		Assert.assertEquals(37, count);
 	}
 
-	
 	// test to show that program throws exception when given wrong file path
 	@Test
 	public void givenWrongFilePathShouldReturnExceptionInStateCode() throws ExceptionStateCensus, CsvException {
@@ -113,7 +107,6 @@ public class TestingStateAnalyzer {
 		Assert.assertEquals(37, count);
 	}
 
-	
 	// test to show that program throws exception when given wrong delimeter input
 	@Test
 	public void givenWrongHeaderInFile_ReturnCustomExceptionInStateCode() throws ExceptionStateCensus, CsvException {

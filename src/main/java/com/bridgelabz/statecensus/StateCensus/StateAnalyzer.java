@@ -1,6 +1,5 @@
 package com.bridgelabz.statecensus.StateCensus;
 
-import java.awt.print.PrinterGraphics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,10 +9,8 @@ import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-
 import com.bridgelabz.statecensus.StateCensus.ExceptionStateCensus.ExceptionType;
 import com.google.gson.Gson;
-import com.opencsv.exceptions.CsvException;
 
 public class StateAnalyzer {
 
@@ -51,7 +48,6 @@ public class StateAnalyzer {
 		} catch (IllegalStateException e) {
 			throw new ExceptionStateCensus("Invalid Class Type for Statecode", ExceptionType.INVALID_CLASS_TYPE);
 		}
-
 	}
 
 	public void checkHeaderException(String filePath, Class className) throws ExceptionStateCensus {
@@ -103,37 +99,6 @@ public class StateAnalyzer {
 		return sortedStateCensusJson;
 	}
 
-	private void sortStateCensus(String order, Comparator<CSVStateCensus> csvStateCensusComparator) {
-		// TODO Auto-generated method stub
-		for (int i = 0; i < listCensus.size() - 1; i++) {
-			for (int j = 0; j < listCensus.size() - i - 1; j++) {
-				CSVStateCensus census1 = listCensus.get(j);
-				CSVStateCensus census2 = listCensus.get(j + 1);
-				switch (order) {
-				case "ascending":
-					if (csvStateCensusComparator.compare(census1, census2) > 0) {
-						listCensus.set(j, census2);
-						listCensus.set(j + 1, census1);
-					}
-					break;
-				case "descending":
-					if (csvStateCensusComparator.compare(census1, census2) < 0) {
-						listCensus.set(j, census2);
-						listCensus.set(j + 1, census1);
-					}
-					break;
-
-				default:
-					System.out.println("Incorrect order mentioned");
-				}
-			}
-		}
-		for (int i = 0; i < listCensus.size(); i++) {
-			System.out.println(listCensus.get(i));
-		}
-
-	}
-
 	public String getStateCodeWiseSortedCodeData(String stateCode_FilePath) throws ExceptionStateCensus {
 		if (listStateCode == null || listStateCode.size() == 0) {
 			throw new ExceptionStateCensus("Empty state census list", ExceptionType.NO_CENSUS_DATA);
@@ -142,36 +107,6 @@ public class StateAnalyzer {
 		this.sortStateCode("ascending", csvStateCodeComparator);
 		String sortedStateCodeJson = new Gson().toJson(listStateCode);
 		return sortedStateCodeJson;
-	}
-
-	private void sortStateCode(String order, Comparator<CSVStateCode> csvStateCodeComparator) {
-		// TODO Auto-generated method stub
-		for (int i = 0; i < listStateCode.size() - 1; i++) {
-			for (int j = 0; j < listStateCode.size() - i - 1; j++) {
-				CSVStateCode code1 = listStateCode.get(j);
-				CSVStateCode code2 = listStateCode.get(j + 1);
-				switch (order) {
-				case "ascending":
-					if (csvStateCodeComparator.compare(code1, code2) > 0) {
-						listStateCode.set(j, code2);
-						listStateCode.set(j + 1, code1);
-					}
-
-					break;
-				case "descending":
-					if (csvStateCodeComparator.compare(code1, code2) > 0) {
-						listStateCode.set(j, code2);
-						listStateCode.set(j + 1, code1);
-					}
-					break;
-				default:
-					System.out.println("Incorrect order mentioned");
-				}
-			}
-		}
-		for (int i = 0; i < listStateCode.size(); i++) {
-			System.out.println(listStateCode.get(i));
-		}
 	}
 
 	public String getPopulationWiseSortedCensusData(String stateCensus_FilePath) throws ExceptionStateCensus {
@@ -208,6 +143,65 @@ public class StateAnalyzer {
 		this.sortStateCensus("descending", csvStateCensusComparator);
 		String sortedStateCensusJson = new Gson().toJson(listCensus);
 		return sortedStateCensusJson;
+	}
+
+	private void sortStateCensus(String order, Comparator<CSVStateCensus> csvStateCensusComparator) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listCensus.size() - 1; i++) {
+			for (int j = 0; j < listCensus.size() - i - 1; j++) {
+				CSVStateCensus census1 = listCensus.get(j);
+				CSVStateCensus census2 = listCensus.get(j + 1);
+				switch (order) {
+				case "ascending":
+					if (csvStateCensusComparator.compare(census1, census2) > 0) {
+						listCensus.set(j, census2);
+						listCensus.set(j + 1, census1);
+					}
+					break;
+				case "descending":
+					if (csvStateCensusComparator.compare(census1, census2) < 0) {
+						listCensus.set(j, census2);
+						listCensus.set(j + 1, census1);
+					}
+					break;
+				default:
+					System.out.println("Incorrect order mentioned");
+				}
+			}
+		}
+		for (int i = 0; i < listCensus.size(); i++) {
+			System.out.println(listCensus.get(i));
+		}
+
+	}
+
+	private void sortStateCode(String order, Comparator<CSVStateCode> csvStateCodeComparator) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listStateCode.size() - 1; i++) {
+			for (int j = 0; j < listStateCode.size() - i - 1; j++) {
+				CSVStateCode code1 = listStateCode.get(j);
+				CSVStateCode code2 = listStateCode.get(j + 1);
+				switch (order) {
+				case "ascending":
+					if (csvStateCodeComparator.compare(code1, code2) > 0) {
+						listStateCode.set(j, code2);
+						listStateCode.set(j + 1, code1);
+					}
+					break;
+				case "descending":
+					if (csvStateCodeComparator.compare(code1, code2) > 0) {
+						listStateCode.set(j, code2);
+						listStateCode.set(j + 1, code1);
+					}
+					break;
+				default:
+					System.out.println("Incorrect order mentioned");
+				}
+			}
+		}
+		for (int i = 0; i < listStateCode.size(); i++) {
+			System.out.println(listStateCode.get(i));
+		}
 	}
 
 }

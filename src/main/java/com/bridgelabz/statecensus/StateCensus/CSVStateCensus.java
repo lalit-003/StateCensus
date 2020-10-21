@@ -12,7 +12,6 @@ public class CSVStateCensus {
 	private String densityPerSqKm;
 
 	public CSVStateCensus() {
-
 	}
 
 	public CSVStateCensus(String stateName, String population, String areaInSqKm, String densityPerSqKm) {
